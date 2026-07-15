@@ -1,0 +1,288 @@
+/* Borda = margem física da página. Uma regra só, herdada por TODAS as
+   páginas (capa, sumário, categoria, produto) — sem exceção. */
+@page {
+    size: A4;
+    margin: 0.5cm;
+    border: 1.2pt solid #6B4E37;
+    @bottom-right {
+        content: counter(page);
+        font-size: 9pt;
+        color: #6B4E37;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+}
+
+/* Capa e abertura de categoria: full bleed, sem borda/margem — cobrem a
+   página física inteira. Só páginas de produto (e sumário) usam a moldura. */
+@page cover {
+    margin: 0;
+    border: none;
+    @bottom-right { content: none; }
+}
+
+@page toc {
+    @bottom-right { content: none; }
+}
+
+@page category {
+    margin: 0;
+    border: none;
+    @bottom-right { content: none; }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #2B2B2B;
+}
+
+/* ── CAPA ── */
+
+.cover {
+    page: cover;
+    width: 100%;
+    height: 297mm; /* full bleed — @page cover não tem margem/borda */
+    display: flex;
+    flex-direction: column;
+}
+
+.cover-accent {
+    height: 10mm;
+    background: #4A6741;
+}
+
+.cover-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.cover-content .logo {
+    width: 75mm;
+    height: auto;
+}
+
+.cover-content h1 {
+    font-size: 38pt;
+    font-weight: 700;
+    color: #6B4E37;
+    margin-top: 8mm;
+    letter-spacing: 1mm;
+}
+
+.cover-content .subtitle {
+    font-size: 15pt;
+    color: #4A6741;
+    margin-top: 4mm;
+    font-weight: 400;
+}
+
+.cover-content .year {
+    font-size: 13pt;
+    color: #6B4E37;
+    margin-top: 12mm;
+    letter-spacing: 2mm;
+}
+
+.cover-line {
+    width: 40mm;
+    height: 0.5mm;
+    background: #4A6741;
+    margin-top: 6mm;
+}
+
+/* ── SUMÁRIO ── */
+
+.toc {
+    page: toc;
+    break-before: page;
+    min-height: 287mm; /* A4 297mm - 2x margem @page (0.5cm) */
+    padding: 6mm;
+}
+
+.toc h2 {
+    font-size: 22pt;
+    color: #4A6741;
+    margin-bottom: 5mm;
+    padding-bottom: 3mm;
+    border-bottom: 0.8pt solid #4A6741;
+    letter-spacing: 1mm;
+}
+
+.toc-list {
+    list-style: none;
+}
+
+.toc-item {
+    display: flex;
+    align-items: baseline;
+    padding: 2.5mm 0;
+    border-bottom: 0.4pt dotted #ccc;
+    font-size: 11.5pt;
+    color: #2B2B2B;
+}
+
+.toc-item .toc-label {
+    text-decoration: none;
+    color: #2B2B2B;
+}
+
+.toc-item .toc-dots {
+    flex: 1;
+    border-bottom: 0.5pt dotted #bbb;
+    margin: 0 3mm;
+    min-height: 1em;
+}
+
+.toc-item .toc-page {
+    text-decoration: none;
+    color: #6B4E37;
+    font-weight: 600;
+}
+
+.toc-page::after {
+    content: target-counter(attr(href url), page);
+}
+
+/* ── PÁGINA DE CATEGORIA ── */
+
+.category-cover {
+    page: category;
+    break-before: page;
+    width: 100%;
+    height: 297mm; /* full bleed — @page category não tem margem/borda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4A6741;
+}
+
+.category-cover h1 {
+    font-size: 40pt;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3mm;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ── PÁGINA DE PRODUTO ── */
+
+.product-page {
+    page: content;
+    break-before: page;
+    height: 287mm; /* A4 297mm - 2x margem @page (0.5cm) */
+    padding: 6mm;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3mm;
+}
+
+.product-header img {
+    width: 40mm;
+    height: 40mm;
+    object-fit: contain;
+    padding: 7mm;
+    background-color: #F5F5F3;
+    border-radius: 50%;
+}
+
+/* Padrão: empilhar e centralizar (1, 2 ou 3 imagens) */
+.product-grid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5mm;
+}
+
+/* 3 imagens: gap vertical reduzido pra priorizar largura da imagem
+   (3 imagens empilhadas competem por altura, não por largura). */
+.product-grid.grid-3 {
+    gap: 3mm;
+}
+
+/* 4 imagens: grade 2x2 centralizada na vertical */
+.product-grid.grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    gap: 4mm;
+    align-content: center;
+}
+
+.img-slot {
+    overflow: hidden;
+    border-radius: 1.5mm;
+}
+
+.img-slot img {
+    display: block;
+    border-radius: 1.5mm;
+}
+
+/* Dimensionamento por quantidade — imagens 4:3, sem corte.
+   Budget vertical do grid (page 287mm - padding 12mm - header 40mm -
+   margin-bottom 3mm - rodapé ~14mm pior caso) ≈ 218mm, com ~6mm de
+   folga mínima (centralizada) pra não ficar apertado no rodapé de 2
+   linhas. Grid-1 é limitado pela largura (imagem 4:3 já no teto de
+   186mm), não pela altura — por isso não cresce mais aqui. */
+.grid-1 .img-slot img { max-width: 186mm; max-height: 212mm; }
+.grid-2 .img-slot img { max-width: 186mm; max-height: 103mm; }
+.grid-3 .img-slot img { max-width: 186mm; max-height: 68mm; }
+.grid-4 .img-slot img { width: 100%; height: auto; }
+
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2mm;
+    font-size: 9pt;
+    color: #6B4E37;
+    border-top: 0.5pt solid #4A6741;
+    padding-top: 2.5mm;
+    margin-top: 2mm;
+    min-height: 10mm;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.product-footer .sep {
+    color: #4A6741;
+    font-weight: 700;
+}
+
+.product-footer .badge-modulado {
+    background: #4A6741;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.3mm 1.8mm;
+    border-radius: 1mm;
+    letter-spacing: 0.3mm;
+    text-transform: uppercase;
+    font-size: 6.8pt;
+}
+
+.product-note {
+    font-size: 7.5pt;
+    font-style: italic;
+    color: #89715F;
+    text-align: center;
+    margin-top: 1mm;
+}

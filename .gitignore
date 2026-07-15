@@ -1,0 +1,13 @@
+# Repo restrito: só o gerador de catálogo PDF (_catalogo) e as fotos-fonte
+# RV (Casa Sinelli) entram no controle de versão. Todo o resto (bibliotecas
+# de fotos brutas de outras +20 marcas fornecedoras, vídeos, etc) fica de
+# fora — só existe no disco local.
+/*
+!/_catalogo/
+!/RV/
+!/.gitignore
+
+# Artefatos de build do catálogo
+_catalogo/output/
+_catalogo/scripts/__pycache__/
+_catalogo/templates/catalogo_gerado.html

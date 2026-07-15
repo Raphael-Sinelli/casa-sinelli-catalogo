@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ css_path }}">
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="cover">
+    <div class="cover-accent"></div>
+    <div class="cover-content">
+        <img class="logo" src="{{ logo_path }}" alt="Casa Sinelli">
+        <h1>Casa Sinelli</h1>
+        <div class="cover-line"></div>
+        <p class="subtitle">Catálogo de Móveis &amp; Colchões</p>
+        <p class="year">2026</p>
+    </div>
+    <div class="cover-accent"></div>
+</div>
+
+<!-- SUMÁRIO -->
+<div class="toc">
+    <h2>SUMÁRIO</h2>
+    <ul class="toc-list">
+        {% for cat in categories %}
+        <li class="toc-item">
+            <span class="toc-label">{{ cat.display_name }}</span>
+            <span class="toc-dots"></span>
+            <a class="toc-page" href="#cat-{{ cat.slug }}"></a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- CATEGORIAS E PRODUTOS -->
+{% for cat in categories %}
+
+<!-- Abertura de categoria -->
+<div class="category-cover" id="cat-{{ cat.slug }}">
+    <h1>{{ cat.display_name }}</h1>
+</div>
+
+<!-- Produtos -->
+{% for product in cat.products %}
+{% for page in product.pages %}
+<div class="product-page">
+    <div class="product-header">
+        <img src="{{ logo_path }}" alt="Casa Sinelli">
+    </div>
+    <div class="product-grid grid-{{ page.count }}">
+        {% for img in page.images %}
+        <div class="img-slot">
+            <img src="{{ img }}">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="product-footer">
+        <span>{{ cat.display_name }}</span>
+        {% if product.modulado %}
+        <span class="sep">|</span>
+        <span class="badge-modulado">Modulado</span>
+        {% endif %}
+        {% if product.sofa_cama %}
+        <span class="sep">|</span>
+        <span class="badge-modulado">Sofá-cama</span>
+        {% endif %}
+        {% if product.cores_text %}
+        <span class="sep">|</span>
+        <span>Cores: {{ product.cores_text }}</span>
+        {% endif %}
+        {% if product.medidas_text %}
+        <span class="sep">|</span>
+        <span>{{ product.medidas_text }}</span>
+        {% endif %}
+    </div>
+    {% if product.observacao %}
+    <div class="product-note">{{ product.observacao }}</div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endfor %}
+
+{% endfor %}
+
+</body>
+</html>
