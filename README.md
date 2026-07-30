@@ -9,13 +9,13 @@ Pipeline de automação desenvolvido em Python para transformar o inventário de
 ![HTML](https://img.shields.io/badge/HTML-Template-E34F26)
 ![CSS](https://img.shields.io/badge/CSS-Layout-1572B6)
 
-# Objetivos
+## Objetivos
 
 Este projeto automatiza a geração do catálogo institucional da Casa Sinelli, substituindo um processo manual de edição de PDFs por um pipeline reproduzível baseado em Python.
 
 Como resultado, o processo de atualização do catálogo torna-se mais rápido, consistente e menos suscetível a erros operacionais.
 
-# Diferenciais
+## Diferenciais
 
 - Pipeline modular em cinco etapas independentes
 - Fonte única de verdade baseada em JSON
@@ -24,7 +24,7 @@ Como resultado, o processo de atualização do catálogo torna-se mais rápido, 
 - Templates HTML reutilizáveis com Jinja2
 - Processamento automatizado de imagens
 
-# Funcionalidades
+## Funcionalidades
 
 - Extração das informações dos produtos
 - Organização automática dos dados em JSON
@@ -76,7 +76,7 @@ Catálogo Final
 | Ghostscript | Compressão do PDF |
 | Poppler | Utilitários para PDF |
 
-# Arquitetura
+## Arquitetura
 
 O projeto segue uma arquitetura baseada em **pipeline**, onde cada etapa possui uma responsabilidade única e pode ser executada de forma independente.
 
@@ -116,7 +116,7 @@ I --> J["Ghostscript"]
 J --> K["PDF otimizado para WhatsApp"]
 ```
 
-# Pipeline
+## Pipeline
 
 O pipeline foi projetado para automatizar completamente a geração do catálogo, desde a organização das informações até a produção do PDF final.
 
@@ -169,7 +169,7 @@ H --> I
 I --> J
 ```
 
-# Fonte dos Dados
+## Fonte dos Dados
 
 Os produtos são centralizados em um arquivo JSON, utilizado como fonte única de verdade para geração do catálogo.
 
@@ -191,7 +191,7 @@ Template HTML
 PDF
 ```
 
-# Processamento das Imagens
+## Processamento das Imagens
 
 Antes da geração do catálogo, todas as imagens passam por uma etapa de normalização.
 
@@ -204,7 +204,7 @@ Entre as etapas do pipeline estão:
 - Preparação para impressão
 - Disponibilização para renderização do template
 
-# Geração do Catálogo
+## Geração do Catálogo
 
 Após o processamento dos dados e das imagens, o template HTML é renderizado utilizando **Jinja2**.
 
@@ -213,14 +213,14 @@ O documento HTML gerado é convertido em PDF através do **WeasyPrint**, preserv
 Ao final do processo, o PDF passa por uma etapa de compressão utilizando **Ghostscript**, produzindo uma versão otimizada para compartilhamento digital.
 
 
-# Princípios da Arquitetura
+## Princípios da Arquitetura
 
 - Responsabilidade única
 - Pipeline modular
 - Separação entre dados e apresentação
 - Scripts independentes
 
-# Boas Práticas Utilizadas
+## Boas Práticas Utilizadas
 
 - Separação entre dados e apresentação
 - Pipeline modular
@@ -233,7 +233,7 @@ Ao final do processo, o PDF passa por uma etapa de compressão utilizando **Ghos
 - Organização das imagens por categoria
 - Geração automatizada do documento final
 
-# Performance
+## Performance
 
 A arquitetura do pipeline foi projetada para minimizar etapas manuais e permitir o reprocessamento independente de cada fase, reduzindo o tempo necessário para atualização do catálogo.
 
@@ -248,7 +248,7 @@ A arquitetura do pipeline foi projetada para minimizar etapas manuais e permitir
 - Compressão do PDF para distribuição digital
 - Separação entre dados, apresentação e processamento
 
-# Estrutura do Projeto
+## Estrutura do Projeto
 
 ```text
 .
@@ -265,9 +265,9 @@ A arquitetura do pipeline foi projetada para minimizar etapas manuais e permitir
     └── templates/
 ```
 
-# Como executar
+## Como executar
 
-## Pré-requisitos
+### Pré-requisitos
 
 Antes de executar o projeto, verifique se o ambiente possui as dependências necessárias instaladas.
 
@@ -278,7 +278,7 @@ Entre elas estão:
 - Ghostscript
 - Poppler
 
-## Clone o repositório
+### Clone o repositório
 
 ```bash
 git clone https://github.com/Raphael-Sinelli/casa-sinelli-catalogo
@@ -286,13 +286,13 @@ git clone https://github.com/Raphael-Sinelli/casa-sinelli-catalogo
 cd casa-sinelli-catalogo
 ```
 
-## Instale as dependências
+### Instale as dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Execute o pipeline
+### Execute o pipeline
 
 Os scripts devem ser executados na ordem numérica.
 
@@ -308,7 +308,7 @@ python _catalogo/scripts/03_gerar_catalogo.py
 python _catalogo/scripts/04_comprimir_whatsapp.py
 ```
 
-# Scripts
+## Scripts
 
 | Script | Descrição |
 |---------|-----------|
@@ -318,7 +318,7 @@ python _catalogo/scripts/04_comprimir_whatsapp.py
 | `03_gerar_catalogo.py` | Renderiza o template HTML e gera o PDF |
 | `04_comprimir_whatsapp.py` | Gera uma versão otimizada para compartilhamento |
 
-# Aprendizados
+## Aprendizados
 
 Durante o desenvolvimento deste projeto foram aprofundados conhecimentos em:
 
@@ -330,7 +330,7 @@ Durante o desenvolvimento deste projeto foram aprofundados conhecimentos em:
 - Geração automatizada de documentos PDF
 - Estruturação de projetos voltados para automação
 
-# Possíveis Evoluções
+## Possíveis Evoluções
 
 O projeto foi desenvolvido para atender às necessidades atuais da geração do catálogo, porém sua arquitetura permite futuras expansões, como:
 
@@ -339,7 +339,7 @@ O projeto foi desenvolvido para atender às necessidades atuais da geração do 
 - Publicação automática do catálogo
 - Geração de múltiplos formatos de saída
 
-# Documentação
+## Documentação
 
 A documentação principal encontra-se neste repositório.
 
@@ -351,10 +351,9 @@ Arquivos relevantes:
 - `_catalogo/scripts/`
 - `_catalogo/css/`
 
-# Licença
+## Licença
 
-Este projeto é disponibilizado apenas para fins de demonstração de portfólio.
-Todos os direitos são reservados.
+Este projeto está sob a licença MIT — ver [LICENSE](LICENSE).
 
 ## Status
 
@@ -362,7 +361,7 @@ Todos os direitos são reservados.
 
 Este pipeline é utilizado na geração do catálogo institucional da Casa Sinelli, produzindo automaticamente versões para impressão e distribuição digital.
 
-# Autor
+## Autor
 
 **Raphael Sinelli**
 
@@ -371,5 +370,5 @@ Tecnólogo em Análise e Desenvolvimento de Sistemas — FIAP
 Desenvolvedor Full Stack | Python | React | TypeScript
 
 - GitHub: https://github.com/Raphael-Sinelli
-- LinkedIn: *(adicione seu perfil)*
+- LinkedIn: https://www.linkedin.com/in/raphael-sinelli/
 - Website: https://www.casasinelli.com.br
