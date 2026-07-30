@@ -6,6 +6,7 @@
 !/_catalogo/
 !/RV/
 !/.gitignore
+!/LICENSE
 
 # Artefatos de build do catálogo
 _catalogo/output/
